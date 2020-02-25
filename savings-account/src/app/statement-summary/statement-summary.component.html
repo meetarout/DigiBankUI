@@ -1,0 +1,12 @@
+
+<h1>Account Summary</h1>
+<div class="accountDetails">
+        <label>Customer Id: </label>  {{custId}} <label>Account Number: </label>{{accountNumber}}
+</div>
+<div class="formclass">
+<div *ngIf="tabledata">
+        <table-component [dataSource]="tabledata" ></table-component>
+        </div>
+
+    </div>
+<router-outlet></router-outlet>
