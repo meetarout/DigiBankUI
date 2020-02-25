@@ -1,0 +1,34 @@
+<h1>Payees</h1>
+
+
+    <table *ngIf="payees">
+        <thead class = "header">
+            <th class="cell header">A/I</th>
+            <th class="cell header">Payee Details</th>
+            <th class="cell header">Activate</th>
+            <th class="cell header">Modify</th>
+            <th class="cell header">Delete</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let payee of payees">
+                <td> {{ payee.payeeStatus }} </td>
+                <td>
+                    <div class = "list">
+                        <p class="cell">{{ payee.payeeId }}</p>
+                        <p class="cell name">{{ payee.name }}</p>
+                        <p class="cell">{{ payee.payeeAccountNumber }}</p>
+                        <p class="cell">{{ payee.payeeBankName }}</p>
+                        <p class="cell">{{ payee.payeeBankIFSC }}</p>
+                        <p class="cell">{{ payee.payeeBankCity }}</p>
+                    </div>
+                </td>
+                <td> <button type="button" (click)="onClickActivate(payee.payeeId, payee.nickName);">Activate</button></td>
+                <td> <button type="button">Modify</button></td>
+                <td> <button type="button"(click)="onClickDelete(payee.payeeId, payee.name);">Delete</button></td>
+            </tr>
+        </tbody>
+        
+
+    </table>
+
+  
