@@ -1,0 +1,39 @@
+        <div class="topnav" *ngIf="!currentUser">
+    <a class="personal" routerLink="personal" routerLinkActive="active">Personal</a>
+    <a class="privilege" routerLink="privilege" routerLinkActive="active">Privilege</a>
+    <a class="wealth" routerLink="wealth" routerLinkActive="active">Wealth</a>
+    <a class="private" href="#private">Private</a>
+    <a class="business" href="#business">Business</a>
+    <a class="corporate" href="#corporate">Corporate</a>
+    <a class="aboutus" routerLink="/aboutus">About Us</a>
+    <a class="cbdeals" href="#cbdeals">Cashback Deals</a>
+    <a class="offers" href="#offers">Offers</a>
+    <a class="help" href="#help">Help</a>
+    <div class="search-container">
+        <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- The form -->
+          <div class="search-customer">
+          <input class="form-control" type="text" placeholder="Search.." name="search">
+          <!--<button  class="b" type="submit"><i class="fa fa-search"></i></button>-->
+  
+          </div>
+      
+          </div>
+  </div>
+
+  <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
+    <div class="navbar-nav" style="width: 100% !important;">
+    <a class="nav-item nav-link" routerLink="/banking">Banking</a>  
+    <a class="nav-item nav-link" routerLink="/personal">Home</a>
+    <a class="nav-item nav-link" (click)="logout()" style="margin-left: 85%">Logout</a>
+    </div>
+    </nav>
+
+<router-outlet></router-outlet>
+ 
+
+
+
+
+
