@@ -1,0 +1,8 @@
+{
+    "payeeName":"Ram",
+    "payeeId":5,
+    "payeeAccountNumber":"12345",
+    "payeeBankName":"SBI",
+    "payeeBankIFSC":"000765g",
+    "payeeBankAddress":"Hyderabad"
+ }

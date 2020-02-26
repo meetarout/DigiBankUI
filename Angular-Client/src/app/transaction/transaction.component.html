@@ -1,0 +1,60 @@
+<!-- {{diagnostic}} -->
+<form [hidden]="submitted" (ngSubmit)="transaction()" [formGroup]="myForm">
+ <div>
+    <!-- <div>
+        <label  for="customer">From : </label>
+        <select  class="form-control" formControlName="customerID" type="customer" [(ngModel)]="customerData">
+          <option *ngFor="let level of customeArray" [ngValue]="level.customerAccountNumber">{{level.customerAccountNumber}}</option>
+        </select>
+    </div> -->
+   
+<!-- <label> customer   </label> -->
+<mat-form-field class="dropDown" >
+ <mat-label>customer</mat-label>
+ <mat-select  formControlName="customerID" >
+ <!-- <mat-option>None</mat-option> -->
+ <mat-option *ngFor="let level of customeArray" [value] ="level">{{level.customerAccountNumber}}</mat-option>
+ 
+ </mat-select>
+</mat-form-field>
+<tr>
+    <td>
+<!-- <label> payee  </label> -->
+<mat-form-field class="dropDown" >
+ <mat-label>payee</mat-label>
+ <mat-select  formControlName="payeeName" >
+ <!-- <mat-option>None</mat-option> -->
+ <mat-option *ngFor="let payee of payeeArray" [value] ="payee">{{payee.payeeName}}-{{payee.payeeAccountNumber}}</mat-option>
+ 
+ </mat-select>
+ </mat-form-field>
+<!--    <div class="form-group">
+        <label for="payee">To :</label>
+        <select  class="form-control" formControlName="payeeName" type="payee" [(ngModel)]="payeeData">
+            <option *ngFor="let payee of payeeArray" [ngValue]="payee.payeeId">{{payee.payeeId}}</option>
+        </select>
+    </div> -->
+    <div class="form-group">
+        <label for="name">Amount</label>
+        <input type="text" class="form-control" formControlName="transactionAmout" required [(ngModel)]="transfor.transactionAmount" name="transactionAmount">
+    </div>
+    <div class="form-group">
+        <label for="name">Remarks</label>
+        <input type="text" class="form-control" formControlName="Remarks" required [(ngModel)]="transfor.remarks" name="remarks">
+    </div>
+    <div class="form-group">
+        <button class="btn btn-success btn-lg btn-block" type="submit">pay</button>
+      </div>
+</div>
+</form>
+<div [hidden]="!submitted">
+    <p>Transaction Amount:{{transfor.transactionAmount}}</p> 
+     <p>Payee Account Number:{{transfor.payeeAccountNumber}}</p>
+    <p>Transaction Date: >{{transfor.transactionTime}}</p>
+    <div *ngIf="error; else elseBlock">{{error}}</div>
+    <ng-template #elseBlock>
+         <p>Transaction sucessfully </p>
+    </ng-template>
+    <!-- <p *ngIf="error"> Transaction sucessfully</p> -->
+</div>
+
