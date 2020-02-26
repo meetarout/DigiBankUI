@@ -33,8 +33,8 @@ disableDate;
     this.custId = parseInt(this.route.snapshot.paramMap.get('custId'));
     this.accountNumber = parseInt(this.route.snapshot.paramMap.get('accNo'));
     this.myForm = new FormGroup({
-      'startDate': new FormControl(''),
-      'endDate': new FormControl(''),
+      'startDate': new FormControl('',Validators.required),
+      'endDate': new FormControl('',Validators.required),
       'monthsDD': new FormControl('')
     });
     
