@@ -1,34 +1,65 @@
-<h1>Payees</h1>
-
-
-    <table *ngIf="payees">
-        <thead class = "header">
-            <th class="cell header">A/I</th>
-            <th class="cell header">Payee Details</th>
-            <th class="cell header">Activate</th>
-            <th class="cell header">Modify</th>
-            <th class="cell header">Delete</th>
-        </thead>
-        <tbody>
-            <tr *ngFor="let payee of payees">
-                <td> {{ payee.payeeStatus }} </td>
-                <td>
-                    <div class = "list">
-                        <p class="cell">{{ payee.payeeId }}</p>
-                        <p class="cell name">{{ payee.name }}</p>
-                        <p class="cell">{{ payee.payeeAccountNumber }}</p>
-                        <p class="cell">{{ payee.payeeBankName }}</p>
-                        <p class="cell">{{ payee.payeeBankIFSC }}</p>
-                        <p class="cell">{{ payee.payeeBankCity }}</p>
-                    </div>
-                </td>
-                <td> <button type="button" (click)="onClickActivate(payee.payeeId, payee.nickName);">Activate</button></td>
-                <td> <button type="button">Modify</button></td>
-                <td> <button type="button"(click)="onClickDelete(payee.payeeId, payee.name);">Delete</button></td>
-            </tr>
-        </tbody>
-        
-
+<div class="container" style="padding-top: 15px;">
+    <mdb-card>
+  
+      <mdb-card-header class="info-color white-text text-center">
+        <h5>
+          <strong>Payees</strong>
+        </h5>
+      </mdb-card-header>
+    
+      <!--Card content-->
+      <mdb-card-body class="px-lg-5">
+    <div *ngIf="payees" class="container">
+    <table mdbTable responsive="true">
+      <thead>
+      <tr>
+        <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let payee of payees">
+        <th scope="row"> {{index()}} </th>
+        <td>
+            {{ payee.payeeStatus }} 
+        </td>
+        <td>
+            <mdb-card>
+                <mdb-card-body>
+                    <mdb-card-title>
+                        <h4>{{ payee.name }}</h4>
+                    </mdb-card-title>
+                    <mdb-card-text>
+                        <br>
+                         <h5> {{ payee.payeeAccountNumber }}</h5>
+                         <br>
+                        {{ payee.payeeBankName }} , {{ payee.payeeBankCity }}
+                    </mdb-card-text> 
+                </mdb-card-body>
+            </mdb-card>
+        </td>
+        <td>
+            <button mdbBtn type="button" color="warning" outline="true" mdbWavesEffect>Modify</button>
+            <br> <br> <br>
+            <button mdbBtn type="button" color="info" outline="true" mdbWavesEffect (click)="onClickActivate(payee.payeeId, payee.nickName);" *ngIf="activateButton(payee.payeeStatus)">Activate</button>
+        </td>
+        <td >
+            <button mdbBtn type="button" color="danger"  outline="true" mdbWavesEffect (click)="onClickDelete(payee.payeeId, payee.name);">Delete</button>
+            <br> <br> <br>
+        </td>
+      </tr>
+      </tbody>
+      <!-- <tfoot class="grey lighten-5 w-100">
+      <tr>
+        <td colspan="4">
+          <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements"></mdb-table-pagination>
+        </td>
+      </tr>
+      </tfoot> -->
     </table>
+  </div>
+</mdb-card-body>
+</mdb-card>
+</div>
 
   

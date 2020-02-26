@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import {HttpService} from '../http.service';
+
+
 
 @Component({
   selector: 'app-view-payee',
@@ -8,9 +9,10 @@ import {HttpService} from '../http.service';
   styleUrls: ['./view-payee.component.scss']
 })
 export class ViewPayeeComponent implements OnInit {
-
+  headElements = ['Sl no.', 'A/I', 'Payee Details', 'Modify', 'Delete'];
   payees: Object;
   cid:string = "1132738";
+  i: number = 1;
 
   constructor(private _http: HttpService) { }
 
@@ -19,6 +21,14 @@ export class ViewPayeeComponent implements OnInit {
       this.payees = data
       console.log(this.payees);
     }, err => {alert(err)});
+  }
+
+  index(){
+    return this.i++;
+  }
+
+  activateButton(x : string){
+    return x !== "Active";
   }
 
   onClickActivate(pid:number, pname:string){

@@ -31,6 +31,16 @@ export class HttpService {
     return this.http.put('http://localhost:8080/payee/activate/'+pid, this.body)
   }
 
+  getPayeeByPID (pid){
+    console.log('Inside getPayeeByPID of Service Class'+pid)
+    return this.http.get('http://localhost:8080/payee/',{params : {'pid':pid}})
+  }
+
+  updatePayee(pId : number , p: Payee){
+    console.log('Inside Update payee method in Service',p);
+    return this.http.put<Payee>('http://localhost:8080/payee/'+pId,p);
+  }
+
   deletePayee(pid:number) {
     return this.http.delete('http://localhost:8080/payee/'+pid)
   }

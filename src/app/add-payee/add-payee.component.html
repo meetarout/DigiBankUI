@@ -1,47 +1,118 @@
 <div class="container" style="padding-top: 15px;">
-    <h1>Create Payee</h1>
-    <form (ngSubmit)="addPayeeOnClick()" >
-      <div class="form-group">
-        <label for="customerId">Customer Id</label>
-        <input type="text" class="form-control" name="customerId" id="customerId"
-         [(ngModel)]="payee.customerId" required>
-      </div>
-      <div class="form-group">
-        <label for="name">Payee Name</label>
-        <input type="text" class="form-control" name="name" id="name"
-        [(ngModel)]="payee.name" required>
-      </div>
-      <div class="form-group">
-        <label for="nickName">Nick Name</label>
-        <input type="text" class="form-control" name="nickName" id="nickName"
-        [(ngModel)]="payee.nickName" required>
-      </div>
-      <div class="form-group">
-        <label for="payeeBankIFSC">Payee Bank IFSC</label>
-        <input type="text" class="form-control" name="payeeBankIFSC" id="payeeBankIFSC"
-        [(ngModel)]="payee.payeeBankIFSC" required>
-      </div>
-      <div class="form-group">
-        <label for="payeeBankAddress">Payee Bank Address</label>
-        <input type="text" class="form-control" name="payeeBankAddress" id="payeeBankAddress"
-        [(ngModel)]="payee.payeeBankAddress" required>
-      </div>
-      <div class="form-group">
-        <label for="payeeBankName">Payee Bank Name</label>
-        <input type="text" class="form-control" name="payeeBankName" id="payeeBankName"
-        [(ngModel)]="payee.payeeBankName" required>
-      </div>
-      <div class="form-group">
-        <label for="payeeBankCity">Payee Bank City</label>
-        <input type="text" class="form-control" name="payeeBankCity" id="payeeBankCity"
-        [(ngModel)]="payee.payeeBankCity" required>
-      </div>
-      <div class="form-group">
-        <label for="payeeAccountNumber">Account Number</label>
-        <input type="text" class="form-control" name="payeeAccountNumber" id="payeeAccountNumber"
-        [(ngModel)]="payee.payeeAccountNumber" required>
-      </div>
-      <button type="submit" class="btn btn-success">Submit</button>
+  <mdb-card>
+
+    <mdb-card-header class="info-color white-text text-center">
+      <h5>
+        <strong>Create Payee</strong>
+      </h5>
+    </mdb-card-header>
   
-    </form>
+    <!--Card content-->
+    <mdb-card-body class="px-lg-5">
+      <form novalidate (ngSubmit)="addPayeeOnClick(); payeeForm.reset()"
+      [formGroup]="payeeForm" class="form-horizontal">
+        <!--<div class="form-group row">
+          <label for="cId" class="col-sm-2">Customer Id</label>
+            <input type="text" class="form-control col" name="customerId" id="cId"
+            formControlName="customerId" required>
+        </div>-->
+        <div class="form-group row">
+          <label for="name"  class="col">Payee Name
+          <input type="text" class="form-control col" name="name" id="name"
+              formControlName="name" required
+              [ngClass]="{'is-invalid': (payeeForm.get('name').touched ||
+              payeeForm.get('name').dirty) && !payeeForm.get('name').valid }" />
+              <div [hidden]="payeeForm.get('name').valid || payeeForm.get('name').pristine"
+                class="alert alert-danger col">
+                Name of the Payee is required
+              </div>
+          </label>
+          <label for="nickName"  class="col">Nick Name
+          <input type="text" class="form-control col" name="nickName" id="nickName"
+            formControlName="nickName" required
+              [ngClass]="{'is-invalid': (payeeForm.get('nickName').touched ||
+              payeeForm.get('nickName').dirty) && !payeeForm.get('nickName').valid }" />
+            <div [hidden]="payeeForm.get('nickName').valid || payeeForm.get('nickName').pristine"
+                class="alert alert-danger col">
+                NickName of the Payee is required
+              </div>
+            </label>
+        </div>
+        <div class="form-group row">
+          <label for="payeeAccountNumber"  class="col">Account Number
+            <input type="text" class="form-control col" name="payeeAccountNumber" id="payeeAccountNumber"
+            formControlName="payeeAccountNumber" required
+                [ngClass]="{'is-invalid': (payeeForm.get('payeeAccountNumber').touched ||
+                payeeForm.get('payeeAccountNumber').dirty) && !payeeForm.get('payeeAccountNumber').valid }" />
+            <div [hidden]="payeeForm.get('payeeAccountNumber').valid || payeeForm.get('payeeAccountNumber').pristine"
+                  class="alert alert-danger col">
+                  Account Number is required
+            </div>
+          </label>
+
+          <label for="payeeBankIFSC"  class="col">Payee Bank IFSC
+          <input type="text" class="form-control col" name="payeeBankIFSC" id="payeeBankIFSC"
+          formControlName="payeeBankIFSC" required
+              [ngClass]="{'is-invalid': (payeeForm.get('payeeBankIFSC').touched ||
+              payeeForm.get('payeeBankIFSC').dirty) && !payeeForm.get('payeeBankIFSC').valid }" />
+          <div [hidden]="payeeForm.get('payeeBankIFSC').valid || payeeForm.get('payeeBankIFSC').pristine"
+                class="alert alert-danger col">
+                IFSC code of the Bank is required
+              </div>
+            </label>
+        </div>
+        
+        <div class="form-group row">
+          <label for="payeeBankName"  class="col">Payee Bank Name
+          <input type="text" class="form-control col" name="payeeBankName" id="payeeBankName"
+          formControlName="payeeBankName" required
+              [ngClass]="{'is-invalid': (payeeForm.get('payeeBankName').touched ||
+              payeeForm.get('payeeBankName').dirty) && !payeeForm.get('payeeBankName').valid }" />
+          <div [hidden]="payeeForm.get('payeeBankName').valid || payeeForm.get('payeeBankName').pristine"
+                class="alert alert-danger col">
+                Name of the Bank is required
+              </div>
+            </label>
+          <label for="payeeBankCity"  class="col">Payee Bank City
+          <input type="text" class="form-control col" name="payeeBankCity" id="payeeBankCity"
+          formControlName="payeeBankCity" required
+              [ngClass]="{'is-invalid': (payeeForm.get('payeeBankCity').touched ||
+              payeeForm.get('payeeBankCity').dirty) && !payeeForm.get('payeeBankCity').valid }" />
+          <div [hidden]="payeeForm.get('payeeBankCity').valid || payeeForm.get('payeeBankCity').pristine"
+                class="alert alert-danger col">
+                City Name of the Bank is required
+              </div>
+            </label>
+        </div>
+        <div class="form-group row">
+            <label for="payeeBankAddress"  class="col">Payee Bank Address
+            <input type="text" class="form-control col" name="payeeBankAddress" id="payeeBankAddress"
+            formControlName="payeeBankAddress" required
+                [ngClass]="{'is-invalid': (payeeForm.get('payeeBankAddress').touched ||
+                payeeForm.get('payeeBankAddress').dirty) && !payeeForm.get('payeeBankAddress').valid }" />
+            <div [hidden]="payeeForm.get('payeeBankAddress').valid || payeeForm.get('payeeBankAddress').pristine"
+                  class="alert alert-danger col">
+                  Address of the Bank is required
+                </div>
+              </label>
+        </div>
+
+        <div class="form-group row">
+          <div class = "col">
+          </div>
+          <div class ="col-5">
+            <button mdbBtn type="button" color="primary" mdbWavesEffect
+            [disabled]="!payeeForm.valid"
+            [title]="payeeForm.valid ? 'Save your entered data' : 'Disabled until all the fields are filled'"
+             >Submit</button>
+
+               <button mdbBtn type="button" color="danger" mdbWavesEffect
+                (click)="payeeForm.reset()">Reset values</button>
+          </div>
+          <div class = "col">
+        </div>
+        </div>
+      </form>
+    </mdb-card-body>
+  </mdb-card>
   </div>
