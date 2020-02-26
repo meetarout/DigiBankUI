@@ -1,19 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn, FormArray } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  AbstractControl,
+  ValidatorFn,
+  FormArray
+} from "@angular/forms";
 
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime } from "rxjs/operators";
 
-import { Customer } from './customer';
-import { CustomerService } from './customer.service';
-import { Router } from '@angular/router';
-
-
-
+import { Customer } from "./customer";
+import { CustomerService } from "./customer.service";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-customer',
-  templateUrl: './customer.component.html',
-  styleUrls: ['./customer.component.css']
+  selector: "app-customer",
+  templateUrl: "./customer.component.html",
+  styleUrls: ["./customer.component.css"]
 })
 export class CustomerComponent implements OnInit {
   mobNumberPattern = "^((\\+91-?)|0)?[0-9]{10}$";
@@ -23,37 +27,37 @@ export class CustomerComponent implements OnInit {
   errorMessage: string;
 
   get addresses(): FormArray {
-    return this.customerForm.get('address') as FormArray;
+    return this.customerForm.get("address") as FormArray;
   }
 
   get emails(): FormArray {
-    return this.customerForm.get('email') as FormArray;
+    return this.customerForm.get("email") as FormArray;
   }
   get phoneNumbers(): FormArray {
-    return this.customerForm.get('phoneNumber') as FormArray;
+    return this.customerForm.get("phoneNumber") as FormArray;
   }
 
   private validationMessages = {
-    required: 'Please enter your email address.',
-    email: 'Please enter a valid email address.'
+    required: "Please enter your email address.",
+    email: "Please enter a valid email address."
   };
 
-  constructor(private fb: FormBuilder,  private customerService: CustomerService) { }
+  constructor(
+    private fb: FormBuilder,
+    private customerService: CustomerService
+  ) {}
 
   ngOnInit() {
     this.customerForm = this.fb.group({
-      customerStatus: '',
-customerId: '',
-      customerName: ['', [Validators.required, Validators.minLength(3)]],
-      lastName: ['', [Validators.required, Validators.maxLength(50)]],
-      middleName: ['', [Validators.required, Validators.maxLength(50)]],
+      customerStatus: "active",
+      customerId: "",
+      customerName: ["", [Validators.required, Validators.minLength(3)]],
+      lastName: ["", [Validators.required, Validators.maxLength(50)]],
+      middleName: ["", [Validators.required, Validators.maxLength(50)]],
       address: this.fb.array([this.buildAddress()]),
       email: this.fb.array([this.buildEmails()]),
-      phoneNumber : this.fb.array([this.buildPhoneNumbers()])
+      phoneNumber: this.fb.array([this.buildPhoneNumbers()])
     });
-
-
-
   }
 
   addAddress(): void {
@@ -68,112 +72,86 @@ customerId: '',
     this.phoneNumbers.push(this.buildPhoneNumbers());
   }
 
+  removeItem() {
+    this.emails.removeAt(this.emails.length - 1);
+  }
+  removephoneNumbers() {
+    this.phoneNumbers.removeAt(this.phoneNumbers.length - 1);
+  }
+
+  removeAddresses() {
+    this.addresses.removeAt(this.addresses.length - 1);
+  }
+
   buildAddress(): FormGroup {
     return this.fb.group({
       addressId: 0,
-      addressType: 'home',
+      addressType: "home",
       isPrimary: false,
-      doorNumber: ['', Validators.required],
-      street: ['', Validators.required],
-      landMark: ['', Validators.required],
-      city: ['', Validators.required],
-      state: ['', Validators.required],
-      country: ['', Validators.required],
-      pinCode: ['', Validators.required]
+      doorNumber: ["", Validators.required],
+      street: ["", Validators.required],
+      landMark: ["", Validators.required],
+      city: ["", Validators.required],
+      state: ["", Validators.required],
+      country: ["", Validators.required],
+      pinCode: ["", Validators.required]
     });
   }
 
   buildEmails(): FormGroup {
     return this.fb.group({
       emailId: 0,
-      emailType: 'home',
+      emailType: "home",
       isPrimaryEmail: false,
-     emailAddress: ['', Validators.required]
+      emailAddress: ["", Validators.required]
     });
   }
 
   buildPhoneNumbers(): FormGroup {
     return this.fb.group({
-      phoneNumberId: '0',
-      phoneNumberType: 'home',
+      phoneNumberId: "0",
+      phoneNumberType: "home",
       isPrimaryNumber: false,
-     number: ['', Validators.required],
-     countryCode: '',
-     cityCode: ''
+      number: ["", Validators.required],
+      countryCode: "",
+      cityCode: ""
     });
   }
-
-  populateTestData(): void {
-    this.customerForm.patchValue({
-      customerName: 'Jack',
-      lastName: 'Harkness',
-      emailGroup: { email: 'jack@torchwood.com', confirmEmail: 'jack@torchwood.com' }
-    });
-    const addressGroup = this.fb.group({
-      addressId: '0',
-      addressType: 'work',
-      doorNumber: '10-101',
-      landMark: 'Near Main Road',
-      street: 'Mermaid Quay',
-      city: 'Cardiff Bay',
-      state: 'CA',
-      country: 'United states',
-      pinCode: '39728'
-    });
-    this.customerForm.setControl('address', this.fb.array([addressGroup]));
-
-    const emailGroup1 = this.fb.group({
-      emailId: '0',
-      emailType: '',
-      isPrimaryEmail: '',
-      emailAddress: ''
-    });
-
-    this.customerForm.setControl('email', this.fb.array([emailGroup1]));
-
-
-    const phoneNumberGroup = this.fb.group({
-      phoneNumberId: '0',
-      phoneNumberType: '',
-      isPrimaryNumber: '',
-      number: '',
-      countryCode: '',
-      cityCode: ''
-    });
-
-    this.customerForm.setControl('phoneNumbers', this.fb.array([phoneNumberGroup]));
-  }
-
 
   get f(): any {
-   // return this.customerForm.controls;
-    return (this.customerForm.get('address') as FormArray).controls;
-}
+    // return this.customerForm.controls;
+    return (this.customerForm.get("address") as FormArray).controls;
+  }
 
-get p(): any {
-  // return this.customerForm.controls;
-   return (this.customerForm.get('phoneNumber') as FormArray).controls;
-}
+  get p(): any {
+    // return this.customerForm.controls;
+    return (this.customerForm.get("phoneNumber") as FormArray).controls;
+  }
 
-
+  get e(): any {
+    // return this.customerForm.controls;
+    return (this.customerForm.get("email") as FormArray).controls;
+  }
 
   save() {
     this.errorMessage = null;
-   // this.newCustomer = <Customer> this.customerForm.value;
+    // this.newCustomer = <Customer> this.customerForm.value;
     console.log(this.customerForm);
-    console.log('Saved: ' + JSON.stringify(this.customerForm.value));
-    console.log('Saved: ' + JSON.stringify(this.newCustomer));
+    console.log("Saved: " + JSON.stringify(this.customerForm.value));
+    console.log("Saved: " + JSON.stringify(this.newCustomer));
     this.newCustomer = new Customer(this.customerForm.value);
-    console.log('Saved customer: ' + JSON.stringify(this.newCustomer));
+    console.log("Saved customer: " + JSON.stringify(this.newCustomer));
     this.customerService.saveCustomer(this.newCustomer).subscribe({
-      next: (data) => {this.newCustomer = data ; },
-      error: err => { this.errorMessage = err.error.errorMessage;
-        console.log(this.errorMessage); }
-      });
+      next: data => {
+        this.newCustomer = data;
+        this.customerForm.reset();
+        this.errorMessage = "Customer creation sucess";
+      },
+      error: err => {
+        this.errorMessage = err.error.errorMessage;
 
-
-
-
+        console.log(this.errorMessage);
+      }
+    });
   }
-
 }
