@@ -11,7 +11,7 @@ export class AboutusComponent implements OnInit {
 
   ngOnInit() {
   }
-openLogin(){
-  this.router.navigate(['/login']);
-}
+// openLogin(){
+//   this.router.navigate(['/login']);
+// }
 }

@@ -2,3 +2,11 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.navbar {
+    font-weight: 300;
+    box-shadow: none !important;
+    width :100%;
+ 
+    margin: none;
+    cursor:pointer;
+}

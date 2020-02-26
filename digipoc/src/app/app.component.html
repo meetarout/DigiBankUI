@@ -9,28 +9,17 @@
     <a class="cbdeals" href="#cbdeals">Cashback Deals</a>
     <a class="offers" href="#offers">Offers</a>
     <a class="help" href="#help">Help</a>
-    <div class="search-container">
-        <link rel="stylesheet" 
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <!-- The form -->
-          <div class="search-customer">
-          <input class="form-control" type="text" placeholder="Search.." name="search">
-          <!--<button  class="b" type="submit"><i class="fa fa-search"></i></button>-->
-  
-          </div>
-      
-          </div>
+    <button class="btn btn-primary" (click)="openLogin()" style="padding: 13px;">Login</button>  
+            
   </div>
-
-  <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
+  <nav class="navbar navbar-expand navbar-light" style="background-color:coral;" *ngIf="currentUser">
     <div class="navbar-nav" style="width: 100% !important;">
-    <a class="nav-item nav-link" routerLink="/banking">Banking</a>  
-    <a class="nav-item nav-link" routerLink="/personal">Home</a>
-    <a class="nav-item nav-link" (click)="logout()" style="margin-left: 85%">Logout</a>
+    <a class="nav-item nav-link" routerLink="/banking" style="color: black;">Banking</a>
+    <a class="nav-item nav-link" (click)="logout()" style="margin-left: 85%;color: black;">Logout</a>
     </div>
     </nav>
-
 <router-outlet></router-outlet>
+
  
 
 

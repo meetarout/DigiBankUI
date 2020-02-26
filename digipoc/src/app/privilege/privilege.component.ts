@@ -11,9 +11,9 @@ export class PrivilegeComponent implements OnInit {
 
   ngOnInit() {
   }
-  openLogin(){
+  // openLogin(){
     
-    this.router.navigate(['/home'])
-  }
+  //   this.router.navigate(['/login'])
+  // }
 
 }

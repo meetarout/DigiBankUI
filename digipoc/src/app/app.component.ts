@@ -14,10 +14,7 @@ import { User } from './_models/User';
 
 export class AppComponent {
   title = 'tek-bank';
-
- 
-
-
+  isNotLogged:boolean=false;
   currentUser: User;
 
   constructor(
@@ -34,7 +31,12 @@ export class AppComponent {
 
   
 
-
+  openLogin(){
+    this.isNotLogged=false;
+    this.router.navigate(['login']);  
+    //window.location.href='/login';
+    }
+  
 
 
 }

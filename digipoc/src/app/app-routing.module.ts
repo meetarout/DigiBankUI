@@ -8,12 +8,13 @@ import { PrivilegeComponent } from './privilege/privilege.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { WealthComponent } from './wealth/wealth.component';
 import { BankingComponent } from './banking/banking.component';
+import { CustomerComponent } from './customers/customer.component';
 
 
 const routes: Route[] = [
 {path:'login', component:LoginComponent},
  {path:'home',component:HomeComponent},
- {path:'register',component:RegisterComponent},
+ {path:'register',component:CustomerComponent},
 {path:'',redirectTo:'/personal', pathMatch:'full'},
  {path:'personal',component:PersonalComponent},
  {path:'privilege',component:PrivilegeComponent},

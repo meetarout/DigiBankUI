@@ -23,6 +23,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import { DemoMaterialModule } from './material-module';
+import { ScrollSlideshowComponent } from './scroll-slideshow/scroll-slideshow.component';
+import { ScrollSlideshowItemComponent } from './scroll-slideshow-item/scroll-slideshow-item.component';
+import { MouseWheelDirective } from './mouse-wheel.directive';
+import { CustomerComponent } from './customers/customer.component';
+
 
 
 @NgModule({
@@ -36,7 +41,10 @@ import { DemoMaterialModule } from './material-module';
     RegisterComponent,
     AlertComponent,
     HomeComponent,
-    BankingComponent,
+    BankingComponent,ScrollSlideshowComponent,
+    ScrollSlideshowItemComponent,
+    MouseWheelDirective,
+	CustomerComponent
    ],
   imports: [
     BrowserModule,

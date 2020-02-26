@@ -11,9 +11,9 @@ export class WealthComponent implements OnInit {
 
   ngOnInit() {
   }
-  openLogin(){
-    this.router.navigate(['/login']);
-  }
+  // openLogin(){
+  //   this.router.navigate(['/login']);
+  // }
   
 
 }
