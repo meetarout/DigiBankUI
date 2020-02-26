@@ -16,25 +16,28 @@ import { error } from 'protractor';
 export class StatementFormComponent implements OnInit {
   
  myForm: FormGroup;
- custId = 1132738;
- accountNumber = 543210;
+ custId;
+ accountNumber;
  startDate;
  endDate;
  maxDate: Date;
  disableSelect:boolean;
  constructor(private svc:StatementService, private http:HttpClient, private route:ActivatedRoute) {
   this.maxDate = new Date();
- // this.custId = parseInt(this.route.snapshot.paramMap.get('custId'));
+  
   }
 tabledata;
 errorMessage;
 disableDate;
   ngOnInit(): void {
+    this.custId = parseInt(this.route.snapshot.paramMap.get('custId'));
+    this.accountNumber = parseInt(this.route.snapshot.paramMap.get('accNo'));
     this.myForm = new FormGroup({
       'startDate': new FormControl(''),
       'endDate': new FormControl(''),
       'monthsDD': new FormControl('')
     });
+    
   }
 
   onChange(e){
@@ -49,17 +52,15 @@ disableDate;
         this.myForm.get('startDate').setValue(new Date(sdate));
         this.disableDate = true;     
     }
-   /*
-    const format = 'yyyy-MM-dd';
-    const locale = 'en-US';
-    console.log(formatDate(this.myForm.get('startDate').value, format, locale));
-    console.log(formatDate(this.myForm.get('endDate').value, format, locale));
-    */
   }
 
   onSubmit() :void{
     this.errorMessage= null;
     this.tabledata=null;
+    if(!this.myForm.get('startDate').value){
+      alert('please select either both dates or months to view the statement');
+      return;
+    }
     const format = 'yyyy-MM-dd';
     const locale = 'en-US';
     let obs = this.http.post('http://localhost:8080/transaction/viewStatement',{

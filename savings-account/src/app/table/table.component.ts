@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 export class Transaction{
-
   transactionId: any;
   transactionType: any;
   availableBalance:any;
@@ -11,7 +10,6 @@ export class Transaction{
   customerId: any;
   payeeId: any;
   customerAccountNumber: any;
-
 }
 
 const ELEMENT_DATA: Transaction[] = [];

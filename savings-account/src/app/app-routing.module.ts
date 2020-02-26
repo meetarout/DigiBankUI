@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {StatementFormComponent} from './statement-form/statement-form.component';
-import {StatementSummaryComponent} from './statement-summary/statement-summary.component';
 import {AppComponent} from './app.component';
 
 const routes: Routes = [
-  {path:'viewStatement', component: StatementFormComponent},
-  {path:'statementSummary', component:StatementSummaryComponent },
+  {path:'viewStatement/:custId/:accNo', component: StatementFormComponent},
   {path:'', redirectTo:'viewStatement', pathMatch: 'full'},
 
- 
 ];
 
 @NgModule({
