@@ -14,6 +14,15 @@ import { Customer } from "./customer";
 import { CustomerService } from "./customer.service";
 import { Router } from "@angular/router";
 
+function emailMatcher(c: AbstractControl): { [key: string]: boolean } | null {
+  const emailControl = c.get("email").get("emailAddress");
+
+  if (emailControl.pristine) {
+    return null;
+  }
+  return { match: true };
+}
+
 @Component({
   selector: "app-customer",
   templateUrl: "./customer.component.html",
@@ -25,6 +34,7 @@ export class CustomerComponent implements OnInit {
   private newCustomer: Customer = new Customer();
   emailMessage: string;
   errorMessage: string;
+  successMessage: string;
 
   get addresses(): FormArray {
     return this.customerForm.get("address") as FormArray;
@@ -103,7 +113,7 @@ export class CustomerComponent implements OnInit {
       emailId: 0,
       emailType: "home",
       isPrimaryEmail: false,
-      emailAddress: ["", Validators.required]
+      emailAddress: ["", [Validators.required, Validators.email]]
     });
   }
 
@@ -113,8 +123,8 @@ export class CustomerComponent implements OnInit {
       phoneNumberType: "home",
       isPrimaryNumber: false,
       number: ["", Validators.required],
-      countryCode: "",
-      cityCode: ""
+      countryCode: ["", Validators.required],
+      cityCode: ["", Validators.required]
     });
   }
 
@@ -133,6 +143,14 @@ export class CustomerComponent implements OnInit {
     return (this.customerForm.get("email") as FormArray).controls;
   }
 
+  setMessage(c: AbstractControl): void {
+    this.emailMessage = "";
+    if ((c.touched || c.dirty) && c.errors) {
+      this.emailMessage = Object.keys(c.errors)
+        .map(key => this.validationMessages[key])
+        .join(" ");
+    }
+  }
   save() {
     this.errorMessage = null;
     // this.newCustomer = <Customer> this.customerForm.value;
@@ -145,7 +163,7 @@ export class CustomerComponent implements OnInit {
       next: data => {
         this.newCustomer = data;
         this.customerForm.reset();
-        this.errorMessage = "Customer creation sucess";
+        this.successMessage = "Customer creation sucess";
       },
       error: err => {
         this.errorMessage = err.error.errorMessage;

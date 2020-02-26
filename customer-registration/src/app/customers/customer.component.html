@@ -420,8 +420,12 @@
                       email.controls.emailAddress.dirty) &&
                     !email.controls.emailAddress.valid
                 }" />
+
         <span class="invalid-feedback">
                 <span *ngIf="email.controls.emailAddress.errors?.required">
+                  Please enter email address .
+                </span>
+        <span *ngIf="email.controls.emailAddress.errors?.email">
                   Please enter valid email.
                 </span>
         </span>
@@ -518,7 +522,10 @@
                 placeholder="country Code"
                 formControlName="countryCode"
                 [ngClass]="{
-                  'is-invalid': !phoneNumber.controls.countryCode.valid
+                  'is-invalid':
+                    (phoneNumber.controls.countryCode.touched ||
+                      phoneNumber.controls.countryCode.dirty) &&
+                    !phoneNumber.controls.countryCode.valid
                 }"
               />
               <span class="invalid-feedback">
@@ -541,12 +548,15 @@
                 placeholder="country Code"
                 formControlName="cityCode"
                 [ngClass]="{
-                  'is-invalid': !phoneNumber.controls.cityCode.valid
+                  'is-invalid':
+                    (phoneNumber.controls.cityCode.touched ||
+                      phoneNumber.controls.cityCode.dirty) &&
+                    !phoneNumber.controls.cityCode.valid
                 }"
               />
               <span class="invalid-feedback">
                 <span *ngIf="phoneNumber.controls.cityCode.errors?.required">
-                  Please enter your country code.
+                  Please enter your city code.
                 </span>
               </span>
             </div>
@@ -560,19 +570,22 @@
               <input
                 class="form-control"
                 id="pnId"
-                type="tel"
+                type="number"
                 placeholder="Phone"
                 formControlName="number"
                 [ngClass]="{
                   'is-invalid':
                     (phoneNumber.controls.number.touched ||
                       phoneNumber.controls.number.dirty) &&
-                    !phoneNumber.controls.number
+                    !phoneNumber.controls.number.valid
                 }"
               />
               <span class="invalid-feedback">
                 <span *ngIf="phoneNumber.controls.number.errors?.required">
                   Please enter your phone number.
+                </span>
+                <span *ngIf="phoneNumber.controls.number.errors?.pattern">
+                  Phone number must be digits.
                 </span>
               </span>
             </div>
@@ -629,6 +642,17 @@
   </div>
 </div>
 
+<div *ngIf="successMessage" class="alert alert-sucess">
+  {{ successMessage }}
+</div>
 <div *ngIf="errorMessage" class="alert alert-danger">
   {{ errorMessage }}
 </div>
+
+<br />Street: {{ addresses.get("0.street")?.value }}
+
+<br />Dirty: {{ customerForm.dirty }} <br />Touched: {{ customerForm.touched }}
+<br />
+touched: {{ this.customerForm.get("email").get("0.emailAddress").touched }},
+{{ this.customerForm.get("phoneNumber").get("0.number").touched }}
+<br />Valid: {{ customerForm.valid }}
