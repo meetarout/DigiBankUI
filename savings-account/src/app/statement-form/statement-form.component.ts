@@ -57,7 +57,7 @@ disableDate;
   onSubmit() :void{
     this.errorMessage= null;
     this.tabledata=null;
-    if(!this.myForm.get('startDate').value){
+    if(!this.myForm.get('startDate').value || !this.myForm.get('endDate').value){
       alert('please select either both dates or months to view the statement');
       return;
     }
