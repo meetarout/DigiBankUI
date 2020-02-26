@@ -1,0 +1,34 @@
+.transaction-container {
+    display: flex;
+    justify-content: center;
+
+}
+
+.custom-container {
+    display: flex;
+    justify-content: space-between;
+    width: 50vw;
+    align-items: center;
+}
+.material-icons.red { color: #FF0000; }
+.customs-container {
+    display: flex;
+    width:50vw;
+    }
+    .customs{
+    display:flex;
+    justify-content :flex-start;
+    align-self:flex-start;
+    }
+    .design{
+    display:flex;
+    flex-grow:2;
+    justify-content:flex-end;
+    align-self:center;
+    margin:20 px;
+    padding:10 px;
+    }
+
+
+
+
