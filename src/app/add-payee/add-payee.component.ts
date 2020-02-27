@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
-import { Payee } from './payee';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -10,24 +9,26 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 })
 export class AddPayeeComponent implements OnInit {
 
-  payeeForm : FormGroup;
+  payeeForm: FormGroup;
 
-  constructor(private _http: HttpService , private fb:FormBuilder) { }
+  constructor(private _http: HttpService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.payeeForm = this.fb.group({
-      customerId : ['1132738',Validators.required],
-      name : ['',Validators.required],
-      nickName: ['',Validators.required],
-      payeeBankIFSC : ['',Validators.required],
-      payeeBankAddress : ['',Validators.required],
-      payeeBankName : ['',Validators.required],
-      payeeBankCity : ['',Validators.required],
-      payeeAccountNumber : ['',Validators.required]
-     });
+      customerId: ['1132738', Validators.required],
+      name: ['', Validators.required],
+      nickName: ['', Validators.required],
+      payeeBankIFSC: ['', Validators.required],
+      payeeBankAddress: ['', Validators.required],
+      payeeBankName: ['', Validators.required],
+      payeeBankCity: ['', Validators.required],
+      payeeAccountNumber: ['', Validators.required]
+    });
   }
 
-  addPayeeOnClick(){
+  addPayeeOnClick() {
+    console.log("hi");
     this._http.addPayee(this.payeeForm.value);
+    console.log(this.payeeForm.value);
   }
 }
