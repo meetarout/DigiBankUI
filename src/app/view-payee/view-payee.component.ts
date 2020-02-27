@@ -20,7 +20,10 @@ export class ViewPayeeComponent implements OnInit {
     this._http.getPayeeByCid(this.cid).subscribe(data => {
       this.payees = data
       console.log(this.payees);
-    }, err => { alert(err) });
+    }, err => {
+      alert('Some Error Occurred!')
+      console.log(err)
+    });
 
     this.payeeForm = this.fb.group({
       customerId: ['*', Validators.required],
@@ -45,7 +48,10 @@ export class ViewPayeeComponent implements OnInit {
         if (data == "OK")
           alert("Payee " + pname + " Activated! Now you can start transferring funds.")
         window.location.reload();
-      }, err => { alert(err) });
+      }, err => {
+        alert('Some Error Occurred!')
+        console.log(err)
+      });
 
     }
   }
@@ -56,7 +62,10 @@ export class ViewPayeeComponent implements OnInit {
         if (data == "OK")
           alert("Deleted the Payee : " + pname + " with ID : " + pid + " successfully!")
         window.location.reload();
-      }, err => { alert(err) });
+      }, err => {
+        alert('Some Error Occurred!')
+        console.log(err)
+      });
 
     }
   }
@@ -76,7 +85,10 @@ export class ViewPayeeComponent implements OnInit {
         })
         this.pid = data['payeeId'];
       },
-      err => { console.log(err) }
+      err => {
+        alert('Some Error Occurred!')
+        console.log(err)
+      }
     );
   }
 
@@ -85,7 +97,10 @@ export class ViewPayeeComponent implements OnInit {
       console.log(data['name'])
       alert('Successfully Updated the Payee: ' + data['name'])
       window.location.reload();
-    }, err => { console.log(err) })
+    }, err => {
+      alert('Some Error Occurred!')
+      console.log(err)
+    })
 
   }
 }

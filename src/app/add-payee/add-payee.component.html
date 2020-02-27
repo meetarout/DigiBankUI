@@ -41,17 +41,17 @@
                 payeeForm.get('payeeAccountNumber').dirty) && !payeeForm.get('payeeAccountNumber').valid }" />
             <div [hidden]="payeeForm.get('payeeAccountNumber').valid || payeeForm.get('payeeAccountNumber').pristine"
               class="alert alert-danger col">
-              Account Number is required
+              Payee Account Number is required
             </div>
           </label>
 
           <label for="payeeBankIFSC" class="col">Payee Bank IFSC
             <input type="text" class="form-control col" name="payeeBankIFSC" id="payeeBankIFSC"
-              formControlName="payeeBankIFSC" required [ngClass]="{'is-invalid': (payeeForm.get('payeeBankIFSC').touched ||
+              pattern="^[A-Za-z]{4}0[A-Z0-9a-z]{6}$" formControlName="payeeBankIFSC" required [ngClass]="{'is-invalid': (payeeForm.get('payeeBankIFSC').touched ||
               payeeForm.get('payeeBankIFSC').dirty) && !payeeForm.get('payeeBankIFSC').valid }" />
             <div [hidden]="payeeForm.get('payeeBankIFSC').valid || payeeForm.get('payeeBankIFSC').pristine"
               class="alert alert-danger col">
-              IFSC code of the Bank is required
+              Please Enter Correct IFSC Code
             </div>
           </label>
         </div>

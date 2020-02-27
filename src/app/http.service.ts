@@ -23,7 +23,6 @@ export class HttpService {
       alert('Successfully added the Payee: ' + data['name'])
     }, err => {
       console.log(err)
-      console.log('inside error method')
     })
   }
 
